@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block 'body' %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Gallery</h2>
+    {%if user.is_authenticated%}
+    <div class="text-center mb-4">
+        <a href="{% url 'upload' %}" class="btn btn-primary">Upload New Image</a>
+    </div>
+    {%endif%}
+    <div class="row">
+        {% for image in images %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{ image.image.url }}" class="card-img-top" alt="{{ image.title }}" style="height: 200px; object-fit: cover;">
+                
+                <div class="card-body text-center">
+                    {%if user.is_authenticated%}
+                    <h5 class="card-title">{{ image.title }}</h5>
+                 
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="" class="btn btn-warning btn-sm">Edit</a>
+                        <form method="POST" action="" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

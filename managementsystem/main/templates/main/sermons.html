@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block 'body' %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Sermons & Preachings</h1>
+
+    <!-- Button to Add New Sermon -->
+    {%if user.is_authenticated%}
+    <div class="text-center mb-4">
+        <a href="{% url 'add_sermon' %}" class="btn btn-success">Add New Sermon</a>
+    </div>
+{%endif%}
+
+    <!-- Sermons List -->
+    <div class="row">
+        {% for sermon in sermons_list %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <img src="{{ sermon.thumbnail.url }}" class="card-img-top" alt="{{ sermon.title }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ sermon.title }}</h5>
+                    <p class="card-text">
+                        <strong>Preacher:</strong> {{ sermon.preacher }}
+                    </p>
+                    {% if sermon.document %}
+<a href="{{ sermon.document.url }}" target="_blank" class="btn btn-outline-info">
+    <i class="fas fa-file-alt"></i> View Written Sermon
+</a>
+{% else %}
+<span class="text-muted">No written sermon available</span>
+{% endif %}
+
+                    <div class="mt-auto d-grid">
+                        <a href="{{ sermon.video_url }}" class="btn btn-primary btn-block " target="_blank">Watch Video</a>
+                    </div>
+                </div>
+                {%if user.is_authenticated%}
+                <div class="card-footer text-center">
+                    <a href="" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+                {%endif%}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Sermons Pagination">
+        <ul class="pagination justify-content-center">
+            {% if sermons_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ sermons_list.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num in sermons_list.paginator.page_range %}
+            <li class="page-item {% if sermons_list.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+
+            {% if sermons_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ sermons_list.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

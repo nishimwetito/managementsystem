@@ -1,0 +1,105 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block 'body' %}
+{% comment %} <div class="container mt-4">
+
+    <!-- Hero Section -->
+    <div class="card text-bg-dark mb-5">
+        <img src="{% static 'images/header.jpg' %}" class="card-img" alt="Church Header">
+        <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+            <h1 class="card-title display-4 text-white">Welcome to Free Methodist Church in Rwanda</h1>
+            <p class="card-text fs-5 text-white">Connecting people to Christ and each other in fellowship and love.</p>
+            <a href="{% url 'events' %}" class="btn btn-primary btn-lg">Join Us</a>
+        </div>
+    </div> {% endcomment %}
+
+    <!-- About Section -->
+    <section class="mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>About Us</h2>
+                <p>
+                    At Free Methodist Church in Rwanda, we are dedicated to sharing the love of Christ 
+                    through worship, community outreach, and spiritual growth. We welcome you to be a 
+                    part of our vibrant and growing family.
+                </p>
+                <a href="#" class="btn btn-outline-primary">Learn More</a>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/ab.jpg' %}" alt="About Us" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministries Section -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Our Ministries</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'images/m2.jpg' %}" class="card-img-top" alt="Ministry 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Youth Ministry</h5>
+                        <p class="card-text">Empowering the next generation with faith and purpose.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'images/m2.jpg' %}" class="card-img-top" alt="Ministry 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Women's Fellowship</h5>
+                        <p class="card-text">Nurturing women in Christ-centered fellowship.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'images/m2.jpg' %}" class="card-img-top" alt="Ministry 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Outreach Ministry</h5>
+                        <p class="card-text">Serving the community with compassion and care.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Upcoming Events</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'images/one-year.jpg' %}" class="card-img-top" alt="Event 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Community Outreach Day</h5>
+                        <p class="card-text">Join us as we serve our community with love and support.</p>
+                        <a href="{% url 'events' %}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'images/one-year.jpg' %}" class="card-img-top" alt="Event 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Sunday Worship</h5>
+                        <p class="card-text">Experience the presence of God with us every Sunday morning.</p>
+                        <a href="{% url 'events' %}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="text-center py-5 bg-light">
+        <h2>Join Our Family</h2>
+        <p class="fs-5">
+            Come and experience the love of Christ. We look forward to seeing you at one of our services.
+        </p>
+        <a href="{% url 'member_list' %}" class="btn btn-success btn-lg">Become a Member</a>
+    </section>
+</div>
+{% endblock %}

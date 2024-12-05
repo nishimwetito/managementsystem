@@ -1,0 +1,14 @@
+{%extends 'main/base.html'%}
+{%load static%}
+
+{%block 'body'%}
+
+<h2>Delete member</h2>
+<p> Are you sure you want to delete {{member.first_name}} {{member.last_name}}?</p>
+<form method='post'>
+    {%csrf_token%}
+    <button type='submit' class='btn btn-danger'> Yes, Delete</button>
+    <a href="{% url 'member_list' %}" class='btn btn-secondary'> Cancel</a>
+</form>
+
+{%endblock%}

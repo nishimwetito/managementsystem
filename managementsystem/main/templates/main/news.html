@@ -1,0 +1,69 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block 'body' %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Church News</h1>
+
+    <!-- Button to Upload News -->
+    {%if user.is_authenticated%}
+    <div class="text-center mb-4">
+        <a href="{% url 'upload_news' %}" class="btn btn-success">Upload News</a>
+    </div>
+{%endif%}
+    <!-- News List -->
+    <div class="row">
+        {% for news in news_list %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ news.title }}</h5>
+                    <p class="card-text">{{ news.summary|truncatewords:20 }}</p>
+                    <a href="{% url 'news_detail' news.pk %}" class="btn btn-primary">Read More</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Published on {{ news.published_date|date:"F d, Y" }}
+
+                    <!-- Edit and Delete Options (only for admin or authorized users) -->
+                    {%if user.is_authenticated%}
+                    <div class="d-flex justify-content-end mt-2">
+                        <a href="{% url 'edit_news' news.pk %}" class="btn btn-warning btn-sm me-2">Edit</a>
+                        <a href="{% url 'delete_news' news.pk %}" class="btn btn-danger btn-sm me-2">Delete</a>
+                       
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="News Pagination">
+        <ul class="pagination justify-content-center">
+            {% if news_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ news_list.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num in news_list.paginator.page_range %}
+            <li class="page-item {% if news_list.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+
+            {% if news_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ news_list.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

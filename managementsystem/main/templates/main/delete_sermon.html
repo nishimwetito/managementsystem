@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% block 'body' %}
+<div class="container mt-5">
+    <h1 class="text-center">Delete Sermon</h1>
+    <p class="text-center">Are you sure you want to delete the sermon "{{ sermon.title }}"?</p>
+    <div class="text-center">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'sermon_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
